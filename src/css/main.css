@@ -1,0 +1,13 @@
+
+.button {
+  border-radius: .5em;
+  border: none;
+  padding: .5em;
+  transition: color 1s blink;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: red;
+  /* animation: none; */
+}
