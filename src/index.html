@@ -2,16 +2,29 @@
 <html>
   <head>
     <link href="css/main.css" rel="stylesheet">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.5.0/tween.umd.js" integrity="sha512-lIKG1kC5TMb1Zx32vdz1n31YJMZRknVY20U9MJ28hD3y2c0OKN0Ce5NhJji78v8zX5UOSsm+MTBOcJt7yMBnSg==" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.5.0/Tween.js" integrity="sha512-5WZlWcKnGz9yzZ+co+1Ow4GDsG4fszrHusMqwGnZAWb9JPqDgpuaSCqbV1cDYkjlhMxGmzs8tmX3uyHoa2AD1Q==" crossorigin="anonymous"></script> -->
   </head>
   <body>
-    <div id="app">
-      <button class="button">Animated Button</button>
+
+    <!-- parent - position: relative -->
+    <div class="container">
+
+      <video id="video" muted>
+        <source type="video/mp4" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4">
+      </video>
+
+      <!-- child - position: absolute -->
+      <section class="controls">
+        <article class="seekbar">
+          <div class="progress" id="progress"></div>
+        </article>
+        <article>
+          <button class="play" id="play-button">Play</button>
+          <button class="pause" id="pause-button">Pause</button>
+        </article>
+      </section>
+
     </div>
-    <div id="tween">
-      <div id="element"></div>
-    </div>
+
     <script src="js/index.js"></script>
   </body>
 </html>

@@ -1,13 +1,39 @@
-
-.button {
-  border-radius: .5em;
-  border: none;
-  padding: .5em;
-  transition: color 1s blink;
-  cursor: pointer;
+body * {
+  box-sizing: border-box;
 }
 
-.button:hover {
-  color: red;
-  /* animation: none; */
+video {
+  width: 100%;
+}
+
+.container {
+  position: relative;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, .75);
+}
+
+.controls .seekbar {
+  height: 8px;
+  position: relative;
+}
+
+.controls .seekbar .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* right: 0; */
+  bottom: 0;
+  background: red;
+}
+
+.controls button {
+  display: inline-block;
+  width: 100px;
+  padding: 10px;
 }
