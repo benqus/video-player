@@ -5,22 +5,15 @@
   </head>
   <body>
 
-    <!-- parent - position: relative -->
     <div class="container">
-
-      <video id="video" muted>
+      <video id="video" class="video-toggle" muted>
         <source type="video/mp4" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4">
       </video>
-
-      <!-- child - position: absolute -->
       <section class="controls">
-        <article class="seekbar">
+        <article class="seekbar" id="seekbar">
           <div class="progress" id="progress"></div>
         </article>
-        <article>
-          <button class="play" id="play-button">Play</button>
-          <button class="pause" id="pause-button">Pause</button>
-        </article>
+        <article id="buttons"></article>
       </section>
 
     </div>
