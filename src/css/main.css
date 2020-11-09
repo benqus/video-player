@@ -19,10 +19,6 @@ video {
   overflow: hidden;
 }
 
-.container:hover .controls {
-  bottom: 0;
-}
-
 .controls {
   position: absolute;
   bottom: -3.5em;
@@ -30,6 +26,15 @@ video {
   right: 0;
   background: rgba(255, 255, 255, .75);
   transition: bottom 0.175s ease-in-out;
+}
+/* .container:hover .controls { */
+.container .controls {
+  bottom: 0;
+}
+
+.controls .rew-fwd-select {
+  outline: none;
+  width: 3em;
 }
 
 .controls .seekbar {
