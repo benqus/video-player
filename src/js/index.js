@@ -2,33 +2,60 @@ const $video = document.getElementById('video');
 const $seekbar = document.getElementById('seekbar');
 const $progress = document.getElementById('progress');
 const $buttons = document.getElementById('buttons');
+const $img = document.getElementById('image');
 
 let interval;
 let jump = 5;
-let volume = 0.75;
 
-// TODO 1. rewind/forward +/- [1,2,3,4,5] seconds
-// TODO 2. volume control
-// TODO 3. keyboard events left/right/space
+const duration = 10;
+const start = 10;
+
+const state = JSON.parse(localStorage.getItem('video.state')) || {
+  volume: 0.75,
+  currentTime: 0
+};
 
 // TODO 4. add 2nd video player
+
+$video.ontimeupdate = (e) => {
+  const { currentTime } = e.target;
+  const show = currentTime > start && currentTime <= (start + duration);
+  const display = (show ? 'inline' : 'none');
+
+  if ($img.style.display !== display) {
+    $img.style.display = display;
+  }
+};
 
 function toggleVideo() {
   if ($video.paused) {
     $video.play();
-    interval = interval ?? setInterval(updateProgressBar, 1000 / 30);
+    interval = interval ?? setInterval(updateVideo, 1000 / 30);
   } else {
     $video.pause();
+    updateVideo();
     clearInterval(interval);
     interval = null;
   }
   renderButtons();
 }
 
+function updateVideo() {
+  updateProgressBar();
+  updateVideoState();
+}
+
 function updateProgressBar() {
   const { currentTime, duration } = $video;
   const progress = (currentTime / duration) * 100;
   $progress.style.right = `${100 - progress}%`;
+}
+
+function updateVideoState() {
+  const { volume, currentTime } = $video;
+  state.volume = volume;
+  state.currentTime = currentTime;
+  localStorage.setItem('video.state', JSON.stringify(state));
 }
 
 function renderButtons() {
@@ -43,7 +70,7 @@ function renderButtons() {
     </select>
     <button class="rwd">R</button>
     <button class="fwd">F</button>
-    <input type="range" class="volume" min="0" max="100" step="1" value="${volume * 100}">
+    <input type="range" class="volume" min="0" max="100" step="1" value="${state.volume * 100}">
   `;
 }
 
@@ -61,7 +88,7 @@ function seekForward() {
 }
 
 function setVolume(newVolume) {
-  volume = $video.volume = Math.max(Math.min(newVolume, 1), 0);
+  state.volume = $video.volume = Math.max(Math.min(newVolume, 1), 0);
   renderButtons()
 }
 
@@ -93,10 +120,8 @@ document.body.addEventListener('change', (e) => {
 
 document.body.addEventListener('input', (e) => {
   const isVolume = e.target.classList.contains('volume');
-  
   if (isVolume) {
-    volume = parseInt(e.target.value) / 100;
-    $video.volume = volume;
+    state.volume = $video.volume = parseInt(e.target.value) / 100;
   }
 });
 
@@ -111,3 +136,6 @@ document.body.addEventListener('keydown', (e) => {
 });
 
 renderButtons();
+
+$video.volume = state.volume;
+$video.currentTime = state.currentTime;
